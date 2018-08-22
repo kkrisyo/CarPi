@@ -132,3 +132,15 @@ app.on('ready', () => {
   // the big red button, here we go
   mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
 });
+
+var gpio = require("gpio");
+var gpio10 = gpio.export(10, {
+  direction: "in",
+  ready: function() {
+  }
+});
+
+gpio10.on("change", function(val) {
+  // value will report either 1 or 0 (number) when the value changes
+  console.log(val)
+});
