@@ -143,4 +143,6 @@ var gpio10 = gpio.export(10, {
 gpio10.on("change", function(val) {
   // value will report either 1 or 0 (number) when the value changes
   console.log(val)
+  mainWindow.webContents.send('ping', val)
+
 });
