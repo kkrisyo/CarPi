@@ -133,16 +133,6 @@ app.on('ready', () => {
   mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
 });
 
-var gpio = require("gpio");
-var gpio10 = gpio.export(10, {
-  direction: "in",
-  ready: function() {
-  }
-});
-
-gpio10.on("change", function(val) {
-  // value will report either 1 or 0 (number) when the value changes
-  console.log(val)
-  mainWindow.webContents.send('ping', val)
-
-});
+const Gpio = require('onoff').Gpio;
+const button = new Gpio(4, 'in', 'both');
+button.watch((err, value) => console.log(value));
