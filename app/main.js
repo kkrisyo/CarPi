@@ -135,4 +135,4 @@ app.on('ready', () => {
 
 const Gpio = require('onoff').Gpio;
 const button = new Gpio(4, 'in', 'both');
-button.watch((err, value) => mainWindow.webContents.send('ping', val) );
+button.watch((err, value) => mainWindow.webContents.send('ping', value) );
