@@ -20,7 +20,8 @@
     "js"
   ],
   "dependencies": {
-    "electron": "^2.0.3",
+    "ngx-electron": "^1.0.4",
+    "electron": "^1.8.8",
     "electron-rebuild": "^1.7.2",
     "lockfile": "^1.0.4",
     "onoff": "^3.2.1"
