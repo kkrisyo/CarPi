@@ -133,9 +133,22 @@ app.on('ready', () => {
   mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
 });
 
-const Gpio = require('onoff').Gpio;
-const button = new Gpio(4, 'in', 'both');
-button.watch((err, value) => mainWindow.webContents.send('ping', value));
+// const Gpio = require('onoff').Gpio;
+// const button = new Gpio(4, 'in', 'both');
+// button.watch((err, value) => mainWindow.webContents.send('ping', value));
+
+const Gpio = require('pigpio').Gpio;
+
+const button = new Gpio(4, {
+  mode: Gpio.INPUT,
+  pullUpDown: Gpio.PUD_DOWN,
+  edge: Gpio.EITHER_EDGE
+});
+
+button.on('interrupt', (level) => {
+  mainWindow.webContents.send('ping', level);
+});
+
 
 
 const mcpadc = require('mcp-spi-adc');
