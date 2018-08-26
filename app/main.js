@@ -162,12 +162,9 @@ const tempSensor = mcpadc.open(5, { speedHz: 20000 }, (err) => {
       var gas = Math.round(reading.value * 100 * 2.4);
       mainWindow.webContents.send('ping2', gas);
       smoke = gas;
+      led.pwmWrite(smoke);
+
     });
   }, 100);
 });
 
-setInterval(() => {
-  led.pwmWrite(smoke);
-  console.log(smoke);
-  
-}, 2000);
