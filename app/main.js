@@ -136,3 +136,18 @@ app.on('ready', () => {
 const Gpio = require('onoff').Gpio;
 const button = new Gpio(4, 'in', 'both');
 button.watch((err, value) => mainWindow.webContents.send('ping', value) );
+
+
+const mcpadc = require('mcp-spi-adc');
+
+const tempSensor = mcpadc.open(5, {speedHz: 20000}, (err) => {
+  if (err) throw err;
+
+  setInterval(() => {
+    tempSensor.read((err, reading) => {
+      if (err) throw err;
+
+      console.log((reading.value * 3.3 - 0.5) * 100);
+    });
+  }, 1000);
+});
