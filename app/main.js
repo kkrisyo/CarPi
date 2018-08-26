@@ -146,7 +146,7 @@ const tempSensor = mcpadc.open(5, {speedHz: 20000}, (err) => {
   setInterval(() => {
     tempSensor.read((err, reading) => {
       if (err) throw err;
-
+      mainWindow.webContents.send('ping2', reading.value);
       console.log((reading.value * 3.3 - 0.5) * 100);
     });
   }, 1000);
