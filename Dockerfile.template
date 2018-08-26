@@ -37,7 +37,7 @@ RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
 
 WORKDIR /opt
 RUN git config --global http.sslVerify false
-RUN git clone https://github.com/joan2937/pigpio
+
 WORKDIR /opt/pigpio
 RUN make
 RUN make install
