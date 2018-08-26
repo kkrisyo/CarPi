@@ -148,8 +148,8 @@ const button = new Gpio(4, {
 button.on('interrupt', (level) => {
   mainWindow.webContents.send('ping', level);
 });
-
-
+const led = new Gpio(17, { mode: Gpio.OUTPUT })
+var smoke = 0;
 
 const mcpadc = require('mcp-spi-adc');
 
@@ -159,8 +159,13 @@ const tempSensor = mcpadc.open(5, { speedHz: 20000 }, (err) => {
   setInterval(() => {
     tempSensor.read((err, reading) => {
       if (err) throw err;
-      var gas = Math.round(reading.value * 100 * 2.4)
+      var gas = Math.round(reading.value * 100 * 2.4);
       mainWindow.webContents.send('ping2', gas);
+      smoke = gas;
     });
   }, 100);
 });
+
+setInterval(() => {
+  led.pwmWrite(smoke);
+}, 20);
