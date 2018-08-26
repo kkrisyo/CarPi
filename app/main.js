@@ -168,4 +168,6 @@ const tempSensor = mcpadc.open(5, { speedHz: 20000 }, (err) => {
 
 setInterval(() => {
   led.pwmWrite(smoke);
-}, 20);
+  console.log(smoke);
+  
+}, 2000);
