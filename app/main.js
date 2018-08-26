@@ -148,7 +148,7 @@ const button = new Gpio(4, {
 button.on('interrupt', (level) => {
   mainWindow.webContents.send('ping', level);
 });
-const led = new Gpio(17, { mode: Gpio.OUTPUT })
+const led = new Gpio(17, { mode: Gpio.OUTPUT });
 var smoke = 0;
 
 const mcpadc = require('mcp-spi-adc');
