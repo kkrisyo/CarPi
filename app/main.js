@@ -165,6 +165,8 @@ buttonBrake.on('interrupt', (level) => {
 });
 
 buttonIgnit1.on('interrupt', (level) => {
+
+  mainWindow.webContents.send('buttonIgnit1', level);
   if (level == 1) {
     led1.pwmWrite(255);
   } else {led1.pwmWrite(0);}
@@ -172,6 +174,7 @@ buttonIgnit1.on('interrupt', (level) => {
 });
 
 buttonIgnit2.on('interrupt', (level) => {
+  mainWindow.webContents.send('buttonIgnit2', level);
   if (level == 1) {
     led2.pwmWrite(255);
   } else {led2.pwmWrite(0);}
