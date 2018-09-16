@@ -139,17 +139,47 @@ app.on('ready', () => {
 
 const Gpio = require('pigpio').Gpio;
 
-const button = new Gpio(4, {
+const buttonBrake = new Gpio(4, {
   mode: Gpio.INPUT,
   pullUpDown: Gpio.PUD_DOWN,
   edge: Gpio.EITHER_EDGE
 });
 
-button.on('interrupt', (level) => {
+const buttonIgnit1 = new Gpio(20, {
+  mode: Gpio.INPUT,
+  pullUpDown: Gpio.PUD_DOWN,
+  edge: Gpio.EITHER_EDGE
+});
+
+const buttonIgnit2 = new Gpio(21, {
+  mode: Gpio.INPUT,
+  pullUpDown: Gpio.PUD_DOWN,
+  edge: Gpio.EITHER_EDGE
+});
+
+const led1 = new Gpio(20, { mode: Gpio.OUTPUT });
+const led2 = new Gpio(21, { mode: Gpio.OUTPUT });
+
+buttonBrake.on('interrupt', (level) => {
   mainWindow.webContents.send('ping', level);
 });
-const led = new Gpio(17, { mode: Gpio.OUTPUT });
-const led2 = new Gpio(27, { mode: Gpio.OUTPUT });
+
+buttonIgnit1.on('interrupt', (level) => {
+  if (level == 1) {
+    led1.pwmWrite(255);
+  } else {led1.pwmWrite(0);}
+  
+});
+
+buttonIgnit2.on('interrupt', (level) => {
+  if (level == 1) {
+    led2.pwmWrite(255);
+  } else {led2.pwmWrite(0);}
+  
+});
+
+const smoke1 = new Gpio(17, { mode: Gpio.OUTPUT });
+const smoke2 = new Gpio(27, { mode: Gpio.OUTPUT });
 var smoke = 0;
 
 const mcpadc = require('mcp-spi-adc');
@@ -164,8 +194,8 @@ const tempSensor = mcpadc.open(5, { speedHz: 20000 }, (err) => {
       mainWindow.webContents.send('ping2', gas);
       var smoke = Math.round(reading.value * 100 * 2.55);
       
-      led.pwmWrite(smoke);
-      led2.pwmWrite(smoke);
+      smoke1.pwmWrite(smoke);
+      smoke2.pwmWrite(smoke);
 
     });
   }, 100);
