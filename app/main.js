@@ -157,8 +157,8 @@ const buttonIgnit2 = new Gpio(21, {
   edge: Gpio.EITHER_EDGE
 });
 
-const led1 = new Gpio(20, { mode: Gpio.OUTPUT });
-const led2 = new Gpio(21, { mode: Gpio.OUTPUT });
+const led1 = new Gpio(5, { mode: Gpio.OUTPUT });
+const led2 = new Gpio(6, { mode: Gpio.OUTPUT });
 
 buttonBrake.on('interrupt', (level) => {
   mainWindow.webContents.send('ping', level);
