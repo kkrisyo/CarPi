@@ -187,18 +187,18 @@ var smoke = 0;
 
 const mcpadc = require('mcp-spi-adc');
 
-const tempSensor = mcpadc.open(5, { speedHz: 20000 }, (err) => {
+const gasPotent = mcpadc.open(5, { speedHz: 20000 }, (err) => {
   if (err) throw err;
 
   setInterval(() => {
-    tempSensor.read((err, reading) => {
+    gasPotent.read((err, reading) => {
       if (err) throw err;
       var gas = Math.round(reading.value * 100 * 2.4);
-      mainWindow.webContents.send('ping2', gas);
+      mainWindow.webContents.send('ping2', reading);
       var smoke = Math.round(reading.value * 100 * 2.55);
       
-      smoke1.pwmWrite(smoke);
-      smoke2.pwmWrite(smoke);
+      // smoke1.pwmWrite(smoke);
+      // smoke2.pwmWrite(smoke);
 
     });
   }, 100);
