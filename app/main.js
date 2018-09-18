@@ -194,7 +194,7 @@ const gasPotent = mcpadc.open(5, { speedHz: 20000 }, (err) => {
     gasPotent.read((err, reading) => {
       if (err) throw err;
       var gas = Math.round(reading.value * 100 * 2.4);
-      mainWindow.webContents.send('ping2', reading);
+      mainWindow.webContents.send('ping2', reading.value);
       var smoke = Math.round(reading.value * 100 * 2.55);
       
       // smoke1.pwmWrite(smoke);
