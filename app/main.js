@@ -194,7 +194,8 @@ const gasPotent = mcpadc.open(5, { speedHz: 20000 }, (err) => {
     gasPotent.read((err, reading) => {
       if (err) throw err;
       var gas = Math.round(reading.value * 100 * 2.4);
-      mainWindow.webContents.send('ping2', reading.value);
+      var test = map_range(reading.value, 0, 0.120, 0, 240);
+      mainWindow.webContents.send('ping2', test);
       var smoke = Math.round(reading.value * 100 * 2.55);
       
       // smoke1.pwmWrite(smoke);
@@ -204,3 +205,7 @@ const gasPotent = mcpadc.open(5, { speedHz: 20000 }, (err) => {
   }, 100);
 });
 
+
+function map_range(value, low1, high1, low2, high2) {
+  return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
