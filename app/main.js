@@ -210,3 +210,19 @@ const gasPotent = mcpadc.open(5, { speedHz: 20000 }, (err) => {
 function map_range(value, low1, high1, low2, high2) {
   return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 }
+
+
+
+
+
+
+process.on('SIGHUP', shutdown);
+process.on('SIGINT', shutdown);
+process.on('SIGCONT', shutdown);
+process.on('SIGTERM', shutdown);
+
+function shutdown() {
+  Gpio.terminate();
+  console.log('raspi3-brownout-watcher must exit, performed cleanup.');
+  process.exit(0);
+}
