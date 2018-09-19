@@ -216,10 +216,10 @@ function map_range(value, low1, high1, low2, high2) {
 
 
 
-process.on('SIGHUP', shutdown());
-process.on('SIGINT', shutdown());
-process.on('SIGCONT', shutdown());
-process.on('SIGTERM', shutdown());
+process.on('SIGHUP', console.log('zamykam sie!!!!!!'));
+process.on('SIGINT', console.log('zamykam sie!!!!!!'));
+process.on('SIGCONT', console.log('zamykam sie!!!!!!'));
+process.on('SIGTERM', console.log('zamykam sie!!!!!!'));
 
 function shutdown() {
   Gpio.terminate();
