@@ -218,11 +218,11 @@ function map_range(value, low1, high1, low2, high2) {
 
 // process.on('SIGHUP', shutdown('SIGHUP'));
 
-process.on('SIGTERM', shutdown('SIGTERM'));
+process.on('SIGTERM', shutdown);
 
-function shutdown(x) {
+function shutdown(signal) {
   pigpio.terminate();
   // gasPotent.close(cb);
-  console.log('zamykam sie!!!!!! bo ', x);
+  console.log('zamykam sie!!!!!! bo ${signal}');
   process.exit(0);
 };
