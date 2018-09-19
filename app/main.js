@@ -223,7 +223,7 @@ process.on('SIGTERM', shutdown());
 
 function shutdown() {
   pigpio.terminate();
-  gasPotent.close(cb);
+  // gasPotent.close(cb);
   console.log('zamykam sie!!!!!!');
   process.exit(0);
 };
