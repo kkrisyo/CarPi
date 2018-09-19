@@ -216,14 +216,14 @@ function map_range(value, low1, high1, low2, high2) {
 
 
 
-process.on('SIGHUP', shutdown());
-process.on('SIGINT', shutdown());
-process.on('SIGCONT', shutdown());
-process.on('SIGTERM', shutdown());
+process.on('SIGHUP', shutdown('SIGHUP'));
+process.on('SIGINT', shutdown('SIGINT'));
+process.on('SIGCONT', shutdown('SIGCONT'));
+process.on('SIGTERM', shutdown('SIGTERM'));
 
-function shutdown() {
+function shutdown(x) {
   pigpio.terminate();
   // gasPotent.close(cb);
-  console.log('zamykam sie!!!!!!');
+  console.log('zamykam sie!!!!!! bo ', x);
   process.exit(0);
 };
