@@ -217,7 +217,7 @@ function map_range(value, low1, high1, low2, high2) {
 
 
 // process.on('SIGHUP', shutdown('SIGHUP'));
-
+process.stdin.resume();
 process.on('SIGTERM', shutdown);
 
 function shutdown(signal) {
