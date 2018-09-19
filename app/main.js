@@ -159,7 +159,7 @@ const buttonIgnit2 = new Gpio(21, {
 
 const led1 = new Gpio(5, { mode: Gpio.OUTPUT });
 const led2 = new Gpio(6, { mode: Gpio.OUTPUT });
-
+console.log('siema');
 buttonBrake.on('interrupt', (level) => {
   mainWindow.webContents.send('ping', level);
 });
@@ -216,10 +216,10 @@ function map_range(value, low1, high1, low2, high2) {
 
 
 
-process.on('SIGHUP', console.log('zamykam sie!!!!!!'));
-process.on('SIGINT', console.log('zamykam sie!!!!!!'));
-process.on('SIGCONT', console.log('zamykam sie!!!!!!'));
-process.on('SIGTERM', console.log('zamykam sie!!!!!!'));
+process.on('SIGHUP', shutdown());
+process.on('SIGINT', shutdown());
+process.on('SIGCONT', shutdown());
+process.on('SIGTERM', shutdown());
 
 function shutdown() {
   Gpio.terminate();
