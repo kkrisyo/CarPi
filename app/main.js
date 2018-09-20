@@ -229,5 +229,5 @@ function shutdown(signal) {
   pigpio.terminate();
   // gasPotent.close(cb);
   console.log('zamykam sie!!!!!! bo ${signal}');
-  process.exit(0);
+  // process.exit(0);
 };
