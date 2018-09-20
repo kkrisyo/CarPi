@@ -212,7 +212,12 @@ function map_range(value, low1, high1, low2, high2) {
 };
 
 
-
+electron.ipcMain.on('async', (event, arg) => {  
+  // Print 1
+  console.log(arg);
+  shutdown(arg);
+  // Reply on async message from renderer process
+});
 
 
 
