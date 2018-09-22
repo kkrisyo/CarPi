@@ -226,7 +226,7 @@ process.stdin.resume();
 process.on('SIGTERM', shutdown);
 
 function shutdown(signal) {
-  pigpio.terminate();
+  // pigpio.terminate();
   // gasPotent.close(cb);
   console.log('zamykam sie!!!!!! bo ${signal}');
   // process.exit(0);
